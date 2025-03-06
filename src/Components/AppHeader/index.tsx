@@ -25,6 +25,10 @@ function AppHeader({
   showNoColor,
 }: AppHeaderProps) {
   const navigation = useNavigation();
+
+  const onLogout = () => {
+    navigation.navigate('Login');
+  };
   return (
     <SafeAreaView
       style={[
@@ -33,13 +37,21 @@ function AppHeader({
           : styles.appHeaderContainer,
       ]}>
       <View style={styles.textContainer}>
-        {isBackVisible && (
+        {isBackVisible ? (
           <TouchableOpacity onPress={() => navigation.goBack()}>
             <Text style={styles.backText}>Back</Text>
           </TouchableOpacity>
+        ) : (
+          <View />
         )}
-        {isTitleVisible && <Text>{title ?? routeName}</Text>}
-        {isRightTextVisible && <Text>{rightText}</Text>}
+        {isTitleVisible ? <Text>{title ?? routeName}</Text> : <View />}
+        {isRightTextVisible && (
+          <TouchableOpacity onPress={onLogout}>
+            <Text style={[showNoColor ? styles.rightText : styles.backText]}>
+              {rightText}
+            </Text>
+          </TouchableOpacity>
+        )}
       </View>
     </SafeAreaView>
   );

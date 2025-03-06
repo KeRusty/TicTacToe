@@ -17,7 +17,18 @@ function MainStack() {
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={{title: 'Home'}}
+        options={{
+          header: () => {
+            return (
+              <AppHeader
+                routeName={'Login'}
+                isRightTextVisible={true}
+                rightText="Log Out"
+                showNoColor
+              />
+            );
+          },
+        }}
       />
       <Stack.Screen
         name="Login"

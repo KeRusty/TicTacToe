@@ -22,4 +22,9 @@ export const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '600',
   },
+  rightText: {
+    color: colors.black,
+    fontSize: 14,
+    fontWeight: '600',
+  },
 });

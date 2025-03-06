@@ -8,12 +8,14 @@ interface BaseTextInputProps {
   placeholder?: string;
   password?: boolean;
   value?: string;
+  onChangeText: any;
 }
 
 function BaseTextInput({
   placeholder,
   password = false,
   value,
+  onChangeText,
 }: BaseTextInputProps) {
   return (
     <View style={styles.container}>
@@ -22,6 +24,7 @@ function BaseTextInput({
         placeholder={placeholder}
         secureTextEntry={password}
         value={value}
+        onChangeText={text => onChangeText(text)}
       />
     </View>
   );
