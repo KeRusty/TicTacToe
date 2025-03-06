@@ -1,9 +1,11 @@
 import React from 'react';
 import {Text, SafeAreaView, View, TouchableOpacity} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
 
 // styles
 import {styles} from './styles';
+import {removeUserdetails} from '../../Utils/redux/slices/user/userSlice';
 
 interface AppHeaderProps {
   routeName?: string;
@@ -24,9 +26,11 @@ function AppHeader({
   rightText,
   showNoColor,
 }: AppHeaderProps) {
+  const dispatch = useDispatch();
   const navigation = useNavigation();
 
   const onLogout = () => {
+    dispatch(removeUserdetails());
     navigation.navigate('Login');
   };
   return (

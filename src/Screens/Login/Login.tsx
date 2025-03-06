@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {SafeAreaView, View} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
+import {useDispatch} from 'react-redux';
+import {setUserDetails} from '../../Utils/redux/slices/user/userSlice';
 
 // Components
 import {BaseTextInput, BaseButton} from '../../Components';
@@ -11,11 +13,13 @@ import {styles} from './styles';
 
 function LoginScreen() {
   const navigation = useNavigation();
+  const dispatch = useDispatch();
   const [userName, setUserName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const onLogin = () => {
     if (userName.length > 0 && password.length > 0) {
+      dispatch(setUserDetails({userName, password}));
       navigation.navigate('Home');
     }
   };
