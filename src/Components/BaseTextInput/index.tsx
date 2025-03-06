@@ -7,15 +7,21 @@ import {styles} from './styles';
 interface BaseTextInputProps {
   placeholder?: string;
   password?: boolean;
+  value?: string;
 }
 
-function BaseTextInput({placeholder, password = false}: BaseTextInputProps) {
+function BaseTextInput({
+  placeholder,
+  password = false,
+  value,
+}: BaseTextInputProps) {
   return (
     <View style={styles.container}>
       <TextInput
         style={styles.textInputContainer}
         placeholder={placeholder}
         secureTextEntry={password}
+        value={value}
       />
     </View>
   );
