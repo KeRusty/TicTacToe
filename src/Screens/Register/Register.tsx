@@ -4,7 +4,7 @@ import {useDispatch} from 'react-redux';
 import {useNavigation} from '@react-navigation/native';
 
 // Components
-import {BaseTextInput, BaseButton} from '../../Components';
+import {BaseTextInput, BaseButton, LogoTitle} from '../../Components';
 
 // Styles
 import {styles} from './styles';
@@ -13,15 +13,14 @@ import {registerUser} from '../../Utils/redux/slices/user/userSlice';
 function RegisterScreen() {
   const dispatch = useDispatch();
   const navigation = useNavigation();
-  const [firstName, setFirstName] = useState<string>('');
-  const [lastName, setLastName] = useState<string>('');
-  const [userName, setUserName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
+  const [name, setName] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
   const onRegister = () => {
     if (password === confirmPassword) {
-      dispatch(registerUser({firstName, lastName, userName, password}));
+      dispatch(registerUser({email, name, password}));
       navigation.navigate('Home');
     } else {
       Alert.alert(
@@ -31,9 +30,8 @@ function RegisterScreen() {
           {
             text: 'Try Again',
             onPress: () => {
-              setFirstName('');
-              setLastName('');
-              setUserName('');
+              setEmail('');
+              setName('');
               setPassword('');
               setConfirmPassword('');
             },
@@ -46,28 +44,21 @@ function RegisterScreen() {
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.container}>
+        <LogoTitle />
         <View style={styles.loginContentContainer}>
           <View style={styles.textInputContainer}>
             <BaseTextInput
-              value={firstName}
-              placeholder="First Name"
-              onChangeText={(text: string) => setFirstName(text)}
+              value={email}
+              placeholder="Email"
+              onChangeText={(text: string) => setEmail(text)}
             />
           </View>
 
           <View style={styles.textInputContainer}>
             <BaseTextInput
-              value={lastName}
-              placeholder="Last Name"
-              onChangeText={(text: string) => setLastName(text)}
-            />
-          </View>
-
-          <View style={styles.textInputContainer}>
-            <BaseTextInput
-              value={userName}
-              placeholder="User Name"
-              onChangeText={(text: string) => setUserName(text)}
+              value={name}
+              placeholder="Name"
+              onChangeText={(text: string) => setName(text)}
             />
           </View>
 

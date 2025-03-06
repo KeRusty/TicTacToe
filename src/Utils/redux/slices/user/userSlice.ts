@@ -2,9 +2,8 @@ import {createSlice, PayloadAction} from '@reduxjs/toolkit';
 import {UserStateType} from './types';
 
 const userInitialState: UserStateType = {
-  firstName: '',
-  lastName: '',
-  userName: '',
+  name: '',
+  email: '',
 };
 
 export const userSlice = createSlice({
@@ -12,9 +11,8 @@ export const userSlice = createSlice({
   initialState: userInitialState,
   reducers: {
     registerUser: (state, {payload}: PayloadAction<any>) => {
-      state.firstName = payload?.firstName;
-      state.lastName = payload?.lastName;
-      state.userName = payload?.userName;
+      state.name = payload?.firstName;
+      state.email = payload?.lastName;
     },
     setUserDetails: (state, {payload}: PayloadAction<any>) => {
       console.log(payload);

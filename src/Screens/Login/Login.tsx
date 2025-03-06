@@ -1,11 +1,11 @@
 import React, {useState} from 'react';
-import {SafeAreaView, View} from 'react-native';
+import {SafeAreaView, View, Text} from 'react-native';
 import {useNavigation} from '@react-navigation/native';
 import {useDispatch} from 'react-redux';
 import {setUserDetails} from '../../Utils/redux/slices/user/userSlice';
 
 // Components
-import {BaseTextInput, BaseButton} from '../../Components';
+import {BaseTextInput, BaseButton, LogoTitle} from '../../Components';
 import {NavToReg} from './components';
 
 // Styles
@@ -14,23 +14,24 @@ import {styles} from './styles';
 function LoginScreen() {
   const navigation = useNavigation();
   const dispatch = useDispatch();
-  const [userName, setUserName] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
 
   const onLogin = () => {
-    if (userName.length > 0 && password.length > 0) {
-      dispatch(setUserDetails({userName, password}));
+    if (email.length > 0 && password.length > 0) {
+      dispatch(setUserDetails({email, password}));
       navigation.navigate('Home');
     }
   };
   return (
     <SafeAreaView style={styles.mainContainer}>
       <View style={styles.container}>
+        <LogoTitle />
         <View style={styles.loginContentContainer}>
           <View style={styles.textInputContainer}>
             <BaseTextInput
               placeholder="User Name"
-              onChangeText={text => setUserName(text)}
+              onChangeText={(text: string) => setEmail(text)}
             />
           </View>
 
@@ -38,7 +39,7 @@ function LoginScreen() {
             <BaseTextInput
               placeholder="Password"
               password={true}
-              onChangeText={text => setPassword(text)}
+              onChangeText={(text: string) => setPassword(text)}
             />
           </View>
 

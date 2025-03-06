@@ -1,5 +1,4 @@
 export type UserStateType = {
-  firstName: string;
-  lastName: string;
-  userName: string;
+  name: string;
+  email: string;
 };
