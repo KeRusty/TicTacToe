@@ -9,4 +9,9 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 4,
   },
+  buttonText: {
+    color: colors.white,
+    fontSize: 16,
+    fontWeight: '600',
+  },
 });

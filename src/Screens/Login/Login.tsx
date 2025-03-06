@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, Text, View} from 'react-native';
+import {SafeAreaView, View, StatusBar} from 'react-native';
 
 // Components
 import {BaseTextInput, BaseButton} from '../../Components';
@@ -22,7 +22,7 @@ function LoginScreen() {
           </View>
 
           <View style={styles.buttonContainer}>
-            <BaseButton text={'Login'} />
+            <BaseButton text={'Login'} onPress={() => {}} />
           </View>
         </View>
 

@@ -4,11 +4,12 @@ import {styles} from './styles';
 
 interface BaseButtonProps {
   text: string;
+  onPress: () => void;
 }
-function BaseButton({text}: BaseButtonProps) {
+function BaseButton({text, onPress}: BaseButtonProps) {
   return (
-    <TouchableOpacity style={styles.buttonContainer}>
-      <Text>{text}</Text>
+    <TouchableOpacity style={styles.buttonContainer} onPress={onPress}>
+      <Text style={styles.buttonText}>{text}</Text>
     </TouchableOpacity>
   );
 }
