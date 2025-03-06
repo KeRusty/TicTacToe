@@ -9,5 +9,20 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: colors.white,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginHorizontal: 40,
+  },
+  textInputContainer: {
+    paddingVertical: 10,
+    width: '100%',
+  },
+  buttonContainer: {
+    marginVertical: 10,
+  },
+  loginContentContainer: {
+    width: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
