@@ -1,15 +1,12 @@
 import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
+import {NavigationContainer} from '@react-navigation/native';
 import MainStack from './src/Routes';
 
 function App(): React.JSX.Element {
-
-
   return (
     <NavigationContainer>
       <MainStack />
     </NavigationContainer>
-
   );
 }
 
