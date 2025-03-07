@@ -5,6 +5,9 @@ export const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  mainContainer: {
+    marginHorizontal: 16,
+  },
   pageHeading: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -14,5 +17,8 @@ export const styles = StyleSheet.create({
     color: colors.blue,
     fontSize: 20,
     fontWeight: '600',
+  },
+  buttonContainer: {
+    marginVertical: 30,
   },
 });

@@ -1,14 +1,15 @@
 import React from 'react';
-import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 // Components
-import {AppHeader} from '../Components';
+import { AppHeader } from '../Components';
 
 // Routes
 import LoginScreen from '../Screens/Login/Login';
 import HomeScreen from '../Screens/Home/Home';
 import RegisterScreen from '../Screens/Register/Register';
 import StatisticsScreen from '../Screens/Statistics/Statistics';
+import GameScreen from '../Screens/Game/Game';
 
 const Stack = createNativeStackNavigator();
 function MainStack() {
@@ -19,14 +20,7 @@ function MainStack() {
         component={HomeScreen}
         options={{
           header: () => {
-            return (
-              <AppHeader
-                routeName={'Login'}
-                isRightTextVisible={true}
-                rightText="Log Out"
-                showNoColor
-              />
-            );
+            return <AppHeader routeName={'Login'} isRightTextVisible={true} rightText="Log Out" showNoColor />;
           },
         }}
       />
@@ -49,10 +43,15 @@ function MainStack() {
         }}
       />
       <Stack.Screen
-        name="Statistics"
-        component={StatisticsScreen}
-        options={{title: 'Overview'}}
+        name="Game"
+        component={GameScreen}
+        options={{
+          header: () => {
+            return <AppHeader routeName={'Game'} isBackVisible={true} />;
+          },
+        }}
       />
+      <Stack.Screen name="Statistics" component={StatisticsScreen} options={{ title: 'Overview' }} />
     </Stack.Navigator>
   );
 }
