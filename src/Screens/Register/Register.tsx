@@ -1,14 +1,15 @@
-import React, {useState} from 'react';
-import {SafeAreaView, View, Alert} from 'react-native';
-import {useDispatch} from 'react-redux';
-import {useNavigation} from '@react-navigation/native';
+import React, { useState } from 'react';
+import { SafeAreaView, View, Alert } from 'react-native';
+import { useDispatch } from 'react-redux';
+import { useNavigation } from '@react-navigation/native';
+import AuthService from '../../Utils/api/AuthService';
+import { registerUser } from '../../Utils/redux/slices/user/userSlice';
 
 // Components
-import {BaseTextInput, BaseButton, LogoTitle} from '../../Components';
+import { BaseTextInput, BaseButton, LogoTitle } from '../../Components';
 
 // Styles
-import {styles} from './styles';
-import {registerUser} from '../../Utils/redux/slices/user/userSlice';
+import { styles } from './styles';
 
 function RegisterScreen() {
   const dispatch = useDispatch();
@@ -18,26 +19,29 @@ function RegisterScreen() {
   const [password, setPassword] = useState<string>('');
   const [confirmPassword, setConfirmPassword] = useState<string>('');
 
-  const onRegister = () => {
+  const onRegister = async () => {
     if (password === confirmPassword) {
-      dispatch(registerUser({email, name, password}));
-      navigation.navigate('Home');
+      try {
+        const registerResponse = await AuthService.register(email, password, name);
+        if (registerResponse?.token) {
+          dispatch(registerUser(registerResponse));
+          navigation.navigate('Home');
+        }
+      } catch (error) {
+        console.error('Register error', error);
+      }
     } else {
-      Alert.alert(
-        'Passwords Do Not Match',
-        'Check your password and try again',
-        [
-          {
-            text: 'Try Again',
-            onPress: () => {
-              setEmail('');
-              setName('');
-              setPassword('');
-              setConfirmPassword('');
-            },
+      Alert.alert('Passwords Do Not Match', 'Check your password and try again', [
+        {
+          text: 'Try Again',
+          onPress: () => {
+            setEmail('');
+            setName('');
+            setPassword('');
+            setConfirmPassword('');
           },
-        ],
-      );
+        },
+      ]);
     }
   };
 
@@ -50,6 +54,7 @@ function RegisterScreen() {
             <BaseTextInput
               value={email}
               placeholder="Email"
+              type="email-address"
               onChangeText={(text: string) => setEmail(text)}
             />
           </View>
@@ -58,6 +63,7 @@ function RegisterScreen() {
             <BaseTextInput
               value={name}
               placeholder="Name"
+              type="default"
               onChangeText={(text: string) => setName(text)}
             />
           </View>
@@ -67,6 +73,7 @@ function RegisterScreen() {
               value={password}
               placeholder="Password"
               password={true}
+              type="default"
               onChangeText={(text: string) => setPassword(text)}
             />
           </View>
@@ -76,6 +83,7 @@ function RegisterScreen() {
               value={confirmPassword}
               placeholder="Confirm Password"
               password={true}
+              type="default"
               onChangeText={(text: string) => setConfirmPassword(text)}
             />
           </View>
