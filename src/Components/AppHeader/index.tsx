@@ -1,11 +1,12 @@
 import React from 'react';
-import {Text, SafeAreaView, View, TouchableOpacity} from 'react-native';
-import {useNavigation} from '@react-navigation/native';
-import {useDispatch} from 'react-redux';
+import { Text, SafeAreaView, View, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
+import { useDispatch } from 'react-redux';
+import AuthService from '../../Utils/api/AuthService';
 
 // styles
-import {styles} from './styles';
-import {removeUserdetails} from '../../Utils/redux/slices/user/userSlice';
+import { styles } from './styles';
+import { removeUserdetails } from '../../Utils/redux/slices/user/userSlice';
 
 interface AppHeaderProps {
   routeName?: string;
@@ -29,17 +30,17 @@ function AppHeader({
   const dispatch = useDispatch();
   const navigation = useNavigation();
 
-  const onLogout = () => {
-    dispatch(removeUserdetails());
-    navigation.navigate('Login');
+  const onLogout = async () => {
+    try {
+      await AuthService.logout();
+      dispatch(removeUserdetails());
+      navigation.navigate('Login');
+    } catch (error) {
+      console.error('Register error', error);
+    }
   };
   return (
-    <SafeAreaView
-      style={[
-        showNoColor
-          ? styles.appHeaderContainerWhite
-          : styles.appHeaderContainer,
-      ]}>
+    <SafeAreaView style={[showNoColor ? styles.appHeaderContainerWhite : styles.appHeaderContainer]}>
       <View style={styles.textContainer}>
         {isBackVisible ? (
           <TouchableOpacity onPress={() => navigation.goBack()}>
@@ -51,9 +52,7 @@ function AppHeader({
         {isTitleVisible ? <Text>{title ?? routeName}</Text> : <View />}
         {isRightTextVisible && (
           <TouchableOpacity onPress={onLogout}>
-            <Text style={[showNoColor ? styles.rightText : styles.backText]}>
-              {rightText}
-            </Text>
+            <Text style={[showNoColor ? styles.rightText : styles.backText]}>{rightText}</Text>
           </TouchableOpacity>
         )}
       </View>
