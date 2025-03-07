@@ -4,6 +4,9 @@ import colors from '../../Utils/colors';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundColor: colors.white,
   },
   mainContainer: {
     marginHorizontal: 16,
@@ -11,14 +14,20 @@ export const styles = StyleSheet.create({
   pageHeading: {
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: 20,
+    marginBottom: 20,
   },
   pageText: {
-    color: colors.blue,
-    fontSize: 20,
+    color: colors.black,
+    fontSize: 24,
     fontWeight: '600',
   },
+  pageTextSubHeading: {
+    paddingTop: 10,
+    color: colors.black,
+    fontSize: 14,
+    fontWeight: '400',
+  },
   buttonContainer: {
-    marginVertical: 30,
+    marginVertical: 15,
   },
 });

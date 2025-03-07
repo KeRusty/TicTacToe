@@ -1,6 +1,6 @@
-import {persistedRootReducer} from './reducer';
-import {configureStore} from '@reduxjs/toolkit';
-import {persistStore} from 'redux-persist';
+import { persistedRootReducer } from './reducer';
+import { configureStore } from '@reduxjs/toolkit';
+import { persistStore } from 'redux-persist';
 import createSagaMiddleware from 'redux-saga';
 
 // Setup Middlewares
@@ -23,4 +23,4 @@ const persistor = persistStore(store, null);
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
 
-export {store, persistor};
+export { store, persistor };
