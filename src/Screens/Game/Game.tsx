@@ -28,7 +28,6 @@ function GameScreen() {
 
   useEffect(() => {
     if (userDetails) {
-      console.log(userDetails, 'ud');
       startNewGameSession();
     }
   }, [userDetails]);

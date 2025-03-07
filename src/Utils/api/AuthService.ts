@@ -45,7 +45,6 @@ class AuthService {
 
   async playerMove(board: any, sessionID: Number): Promise<PlayMoveResponse> {
     try {
-      console.log({ board, sessionId: sessionID }, 'SESSS');
       const response = await api.post<PlayMoveResponse>('/game/player_move', { board, sessionId: sessionID });
       return response.data;
     } catch (error: any) {
@@ -55,7 +54,6 @@ class AuthService {
 
   async cpuMove(board: any, sessionID: Number): Promise<PlayMoveResponse> {
     try {
-      console.log({ board, sessionId: sessionID }, 'SESSS CPU');
       const response = await api.post<PlayMoveResponse>('/game/pc_move', { board, sessionId: sessionID });
       return response.data;
     } catch (error: any) {
