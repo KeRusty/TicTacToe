@@ -89,7 +89,7 @@ function RegisterScreen() {
           </View>
 
           <View style={styles.buttonContainer}>
-            <BaseButton text={'Register'} onPress={onRegister} />
+            <BaseButton text={'Register'} smallButton={true} onPress={onRegister} />
           </View>
         </View>
       </View>

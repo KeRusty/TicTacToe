@@ -61,7 +61,7 @@ function LoginScreen() {
           </View>
 
           <View style={styles.buttonContainer}>
-            <BaseButton text={'Login'} onPress={() => onLogin()} />
+            <BaseButton text={'Login'} smallButton={true} onPress={() => onLogin()} />
           </View>
         </View>
 

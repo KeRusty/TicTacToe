@@ -8,7 +8,7 @@ export const styles = StyleSheet.create({
   },
   text: {
     color: colors.black,
-    fontSize: 40,
+    fontSize: 30,
     fontWeight: '600',
   },
 });

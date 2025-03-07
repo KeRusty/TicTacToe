@@ -42,7 +42,8 @@ function HomeScreen() {
   return (
     <View style={styles.container}>
       <View style={styles.pageHeading}>
-        <Text style={styles.pageText}>{`Welcome ${userDetails?.name}`}</Text>
+        <Text style={styles.pageText}>{'Welcome to Tic.Tac.Toe'}</Text>
+        <Text style={styles.pageTextSubHeading}>{"Choose what you'd like to do"}</Text>
       </View>
 
       <View style={styles.mainContainer}>
@@ -51,7 +52,7 @@ function HomeScreen() {
         </View>
 
         <View style={styles.buttonContainer}>
-          <BaseButton text={'View your Statistics'} onPress={navigateToStats} />
+          <BaseButton text={'View Statistics'} onPress={navigateToStats} />
         </View>
       </View>
     </View>

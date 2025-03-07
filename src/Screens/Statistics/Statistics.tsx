@@ -33,9 +33,9 @@ function StatisticsScreen() {
   }, [userDetails]);
 
   return (
-    <View>
+    <View style={styles.container}>
       <View style={styles.pageHeading}>
-        <Text style={styles.pageText}>{`Your Statistics are displayed below, ${userDetails?.name}`}</Text>
+        <Text style={styles.pageText}>{'Your Statistics'}</Text>
       </View>
       <StatsBoard />
     </View>

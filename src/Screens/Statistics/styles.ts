@@ -4,9 +4,7 @@ import colors from '../../Utils/colors';
 export const styles = StyleSheet.create({
   container: {
     flex: 1,
-  },
-  mainContainer: {
-    marginHorizontal: 16,
+    backgroundColor: colors.white,
   },
   pageHeading: {
     justifyContent: 'center',
@@ -15,7 +13,7 @@ export const styles = StyleSheet.create({
   },
   pageText: {
     color: colors.black,
-    fontSize: 15,
+    fontSize: 30,
     fontWeight: '600',
   },
   buttonContainer: {

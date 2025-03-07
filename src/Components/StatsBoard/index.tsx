@@ -10,12 +10,12 @@ function StatsBoard() {
   const stats = useSelector(getUserStats);
   return (
     <View style={styles.container}>
-      <View style={styles.statBox}>
+      <View style={styles.statBoxGreen}>
         <Text style={styles.statText}>Wins: {`${stats ? stats?.userStats?.wins : 0}`}</Text>
       </View>
 
       <View style={styles.row}>
-        <View style={styles.statBox}>
+        <View style={styles.statBoxRed}>
           <Text style={styles.statText}>Losses: {`${stats ? stats?.userStats?.losses : 0}`}</Text>
         </View>
 
