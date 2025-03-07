@@ -11,7 +11,8 @@ import { TicTacToeBoard } from '../../Components';
 // Styles
 import { styles } from './styles';
 
-function GameScreen() {
+function GameScreen({ route }) {
+  const { whoStarts } = route.params;
   const dispatch = useDispatch();
   const userDetails = useSelector(getUserDetails);
 
@@ -34,7 +35,7 @@ function GameScreen() {
 
   return (
     <View style={styles.container}>
-      <TicTacToeBoard />
+      <TicTacToeBoard whoStarts={whoStarts} />
     </View>
   );
 }

@@ -1,6 +1,6 @@
 import api from './api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { PlayMoveResponse, RegisterLoginResponse } from './interface';
+import { PlayMoveResponse, RegisterLoginResponse, StatisticsResponse } from './interface';
 
 class AuthService {
   async login(email: string, password: string): Promise<RegisterLoginResponse> {
@@ -55,6 +55,15 @@ class AuthService {
   async cpuMove(board: any, sessionID: Number): Promise<PlayMoveResponse> {
     try {
       const response = await api.post<PlayMoveResponse>('/game/pc_move', { board, sessionId: sessionID });
+      return response.data;
+    } catch (error: any) {
+      throw error;
+    }
+  }
+
+  async getStats(): Promise<StatisticsResponse> {
+    try {
+      const response = await api.get<StatisticsResponse>('/stats');
       return response.data;
     } catch (error: any) {
       throw error;

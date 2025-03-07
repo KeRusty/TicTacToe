@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import AuthService from '../../Utils/api/AuthService';
 import { getGameDetails } from '../../Utils/redux/slices/game/selector';
+import { updateBoard } from '../../Utils/redux/slices/game/slice';
 
 // styles
 import { styles } from './styles';
@@ -13,8 +14,9 @@ type BoardState = Player[][];
 const X: Player = 'X';
 const O: Player = 'O';
 
-const TicTacToe: React.FC = () => {
+const TicTacToe = ({ whoStarts }: any) => {
   const gameDetail = useSelector(getGameDetails);
+  const dispatch = useDispatch();
 
   const [board, setBoard] = useState<BoardState>([
     [X, null, null],
@@ -22,6 +24,7 @@ const TicTacToe: React.FC = () => {
     [null, null, X],
   ]);
   const [isXNext, setIsXNext] = useState<boolean>(true);
+  const [currentMove, setCurrentMove] = useState<string>(whoStarts);
   const [winner, setWinner] = useState<Player | 'Draw' | null>(null);
 
   useEffect(() => {
@@ -45,19 +48,20 @@ const TicTacToe: React.FC = () => {
         setBoard(newBoard);
         setIsXNext(gameDetail.currentPlayer === 'x');
         setWinner(gameDetail.winner);
+        setCurrentMove(gameDetail.currentPlayer === 'x' ? 'player' : 'cpu');
       }
     }
   }, [gameDetail]);
 
   const checkGameStatus = async (updatedBoard: BoardState) => {
-    console.log('checkGameStatus');
     const formattedBoard = JSON.stringify(
       updatedBoard.map(row => row.map(cell => (cell === X ? 1 : cell === O ? 2 : 0))),
     );
 
+    dispatch(updateBoard(formattedBoard));
+
     try {
       const result = await AuthService.playerMove(formattedBoard, gameDetail?.id);
-      console.log(result, 'result');
       return result;
     } catch (error) {
       console.error('Error checking game status:', error);
@@ -66,10 +70,10 @@ const TicTacToe: React.FC = () => {
   };
 
   const handleCpuMove = async () => {
-    console.log('handleCpuMove');
     setTimeout(async () => {
       try {
         const formattedBoard = JSON.stringify(board.map(row => row.map(cell => (cell === X ? 1 : cell === O ? 2 : 0))));
+        dispatch(updateBoard(formattedBoard));
         const result = await AuthService.cpuMove(formattedBoard, gameDetail?.id);
         const { board: newBoard, status } = result;
         setBoard(newBoard.map(row => row.map((cell: number) => (cell === 1 ? X : cell === 2 ? O : null))));
@@ -77,6 +81,7 @@ const TicTacToe: React.FC = () => {
           setWinner(status.includes('wins') ? (status.includes('x') ? X : O) : 'Draw');
         }
         setIsXNext(true);
+        setCurrentMove('player');
       } catch (error) {
         console.error('Error making CPU move:', error);
       }
@@ -99,6 +104,7 @@ const TicTacToe: React.FC = () => {
       handleCpuMove();
     }
     setIsXNext(!isXNext);
+    setCurrentMove(isXNext ? 'cpu' : 'player');
   };
 
   const resetGame = (): void => {
@@ -107,14 +113,21 @@ const TicTacToe: React.FC = () => {
       [null, O, null],
       [null, null, X],
     ]);
-    setIsXNext(true);
+    setIsXNext(whoStarts === 'player');
     setWinner(null);
+    setCurrentMove(whoStarts);
   };
+
+  useEffect(() => {
+    if (whoStarts === 'cpu') {
+      handleCpuMove();
+    }
+  }, [whoStarts]);
 
   return (
     <View style={styles.container}>
       <Text style={styles.status}>
-        {winner ? (winner === 'Draw' ? "It's a Draw!" : `${winner} Wins!`) : `Next Player: ${isXNext ? X : O}`}
+        {winner ? (winner === 'Draw' ? "It's a Draw!" : `${winner} Wins!`) : `Current Turn: ${currentMove}`}
       </Text>
       <View style={styles.board}>
         {board.map((row, rowIndex) =>

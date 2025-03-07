@@ -8,6 +8,12 @@ const gameInitialState: GameStateType = {
   status: '',
   winner: 'null',
   userId: 0,
+  userStats: {
+    id: 0,
+    losses: 0,
+    wins: 0,
+    draws: 0,
+  },
 };
 
 export const gameSlice = createSlice({
@@ -22,6 +28,12 @@ export const gameSlice = createSlice({
       state.winner = payload?.winner;
       state.userId = payload?.userId;
     },
+    updateBoard: (state, { payload }: PayloadAction<any>) => {
+      state.board = payload?.board;
+    },
+    updateUserStats: (state, { payload }: PayloadAction<any>) => {
+      state.stats = payload.stats;
+    },
     // setUserDetails: (state, { payload }: PayloadAction<any>) => {
     //   state.token = payload?.token;
     //   state.name = payload?.user?.name;
@@ -34,5 +46,5 @@ export const gameSlice = createSlice({
   },
 });
 
-export const { startGameSession } = gameSlice.actions;
+export const { startGameSession, updateBoard, updateUserStats } = gameSlice.actions;
 export default gameSlice.reducer;

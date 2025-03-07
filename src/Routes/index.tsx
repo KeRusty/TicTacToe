@@ -51,7 +51,15 @@ function MainStack() {
           },
         }}
       />
-      <Stack.Screen name="Statistics" component={StatisticsScreen} options={{ title: 'Overview' }} />
+      <Stack.Screen
+        name="Statistics"
+        component={StatisticsScreen}
+        options={{
+          header: () => {
+            return <AppHeader routeName={'Game'} isBackVisible={true} />;
+          },
+        }}
+      />
     </Stack.Navigator>
   );
 }
