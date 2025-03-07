@@ -14,8 +14,8 @@ export const styles = StyleSheet.create({
     paddingVertical: 20,
   },
   pageText: {
-    color: colors.blue,
-    fontSize: 20,
+    color: colors.black,
+    fontSize: 15,
     fontWeight: '600',
   },
   buttonContainer: {

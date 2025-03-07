@@ -1,6 +1,6 @@
 import api from './api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { RegisterLoginResponse } from './interface';
+import { PlayMoveResponse, RegisterLoginResponse, StatisticsResponse } from './interface';
 
 class AuthService {
   async login(email: string, password: string): Promise<RegisterLoginResponse> {
@@ -34,20 +34,41 @@ class AuthService {
     await AsyncStorage.removeItem('token');
   }
 
-  //   async getUserProfile(): Promise<UserProfile> {
-  //     try {
-  //       const response = await api.get<UserProfile>('/auth/me');
-  //       return response.data;
-  //     } catch (error: any) {
-  //       console.error('Error fetching user profile:', error.response?.data || error.message);
-  //       throw error;
-  //     }
-  //   }
+  async createGameSession(): Promise<RegisterLoginResponse> {
+    try {
+      const response = await api.post<RegisterLoginResponse>('/game/create_game_session', { startWithPlayer: true });
+      return response.data;
+    } catch (error: any) {
+      throw error;
+    }
+  }
 
-  //   async isAuthenticated(): Promise<boolean> {
-  //     const token = await AsyncStorage.getItem('token');
-  //     return !!token;
-  //   }
+  async playerMove(board: any, sessionID: Number): Promise<PlayMoveResponse> {
+    try {
+      const response = await api.post<PlayMoveResponse>('/game/player_move', { board, sessionId: sessionID });
+      return response.data;
+    } catch (error: any) {
+      throw error;
+    }
+  }
+
+  async cpuMove(board: any, sessionID: Number): Promise<PlayMoveResponse> {
+    try {
+      const response = await api.post<PlayMoveResponse>('/game/pc_move', { board, sessionId: sessionID });
+      return response.data;
+    } catch (error: any) {
+      throw error;
+    }
+  }
+
+  async getStats(): Promise<StatisticsResponse> {
+    try {
+      const response = await api.get<StatisticsResponse>('/stats');
+      return response.data;
+    } catch (error: any) {
+      throw error;
+    }
+  }
 }
 
 export default new AuthService();
