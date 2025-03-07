@@ -8,3 +8,8 @@ export type RegisterLoginResponse = {
   user: RegisteLoginrUserObj;
   token: string;
 };
+
+export type PlayMoveResponse = {
+  board: any;
+  sessionId: Number;
+};
