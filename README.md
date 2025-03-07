@@ -1,4 +1,4 @@
-# 📌 Project Name
+# 📌 TicTacToe
 
 A Mobile app for a TicTacToe Game.
 
