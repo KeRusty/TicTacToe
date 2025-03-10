@@ -1,6 +1,6 @@
 import api from './api';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { PlayMoveResponse, RegisterLoginResponse, StatisticsResponse } from './interface';
+import { PlayMoveResponse, RegisterLoginResponse, StartWithPlayerResponse, StatisticsResponse } from './interface';
 
 class AuthService {
   async login(email: string, password: string): Promise<RegisterLoginResponse> {
@@ -34,9 +34,11 @@ class AuthService {
     await AsyncStorage.removeItem('token');
   }
 
-  async createGameSession(): Promise<RegisterLoginResponse> {
+  async createGameSession(startWithPlayer: boolean): Promise<StartWithPlayerResponse> {
     try {
-      const response = await api.post<RegisterLoginResponse>('/game/create_game_session', { startWithPlayer: true });
+      const response = await api.post<StartWithPlayerResponse>('/game/create_game_session', {
+        startWithPlayer: startWithPlayer,
+      });
       return response.data;
     } catch (error: any) {
       throw error;

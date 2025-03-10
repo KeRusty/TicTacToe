@@ -14,7 +14,8 @@ function HomeScreen() {
   const navigation = useNavigation();
   const userDetails = useSelector(getUserDetails);
 
-  const navigateToGamePage = () => {
+  const navigateToGamePage = async() => {
+    
     Alert.alert('Who Starts the Game?', 'would it be you or the CPU?', [
       {
         text: 'Me',

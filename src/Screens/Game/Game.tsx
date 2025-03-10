@@ -18,7 +18,7 @@ function GameScreen({ route }) {
 
   const startNewGameSession = async () => {
     try {
-      const startSession = await AuthService.createGameSession();
+      const startSession = await AuthService.createGameSession(whoStarts === 'cpu' ? false : true);
       if (startSession) {
         dispatch(startGameSession(startSession));
       }
